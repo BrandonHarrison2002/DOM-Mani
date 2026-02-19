@@ -46,10 +46,9 @@ function addNewArticle() {
     var content = document.getElementById("inputArticle").value;
     var typeSelect = document.querySelector('input[name="articleType"]:checked').value;
 
-    console.log(typeSelect);
-
     var newArticle = document.createElement("article");
     newArticle.classList.add(typeSelect);
+    newArticle.id = "a" + (articles.children.length + 1);
 
     var newTitle = document.createElement("h2");
     newTitle.textContent = title;
@@ -59,12 +58,20 @@ function addNewArticle() {
 
     var marker = document.createElement("span");
     marker.classList.add("marker");
-    marker.textContent = typeSelect;
+    marker.textContent = typeSelect.substring(0, 1).toUpperCase() + typeSelect.substring(1);
+    
+    var readMore = document.createElement("p");
+    var readMoreLink = document.createElement("a");
+    readMoreLink.href = "#";
+    readMoreLink.textContent = "Read more...";
 
     newArticle.appendChild(marker);
     newArticle.appendChild(newTitle);
     newArticle.appendChild(newContent);
     articles.appendChild(newArticle);
+    readMore.appendChild(readMoreLink);
+    newArticle.appendChild(readMore);
+    
 
     //CLEAR THE FORM
     document.getElementById("inputHeader").value = "";
